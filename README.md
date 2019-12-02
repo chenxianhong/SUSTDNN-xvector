@@ -7,7 +7,7 @@ We use phoneme recognizer from Brno University of Technology to get phoneme prob
 
 
 
-Usage:
+## Usage
 
 For using the codes, you first should install Kaldi and clone the codes in egs/sre16 (or somewhere else that you want, by changing the symlinks to proper positions). 
 
@@ -17,21 +17,21 @@ Before run run_sre10_10sec.sh and run_sre10_core.sh, run run_sre10_coreext.sh fi
 
 If you want to test different topology, you can add a subclass of Model to local/tf/models.py and overwrite the build_model function (in the file you can see several topologies). Then you just need to pass class name to local/tf/train_dnn.py by changing --tf-model-class in local/tf/run_xvector.sh.
 
-In local/tf/models.py, ModelL2LossWithoutDropoutLReluAttention_63dim is our baseline. It is in fact the same as ModelL2LossWithoutDropoutLReluAttention except that its input feature are 63 dimensional. Only the first 23 MFCCs are used. The following 40 dimensions are phoneme posterior.
-ModelL2LossWithoutDropoutLReluAttentionPhoneme is x-vector with SUSTDNN without phoneme classification.
-ModelL2LossWithoutDropoutLReluAttentionPhonemeCluster is x-vector with SUSTDNN and phoneme classification.
-ModelL2LossWithoutDropoutLReluAttentionPhonemeCluster2layer is x-vector with SUSTDNN and phoneme classification. Replace the first two TDNN layers with SUS-TDNN layers.
+    In local/tf/models.py, ModelL2LossWithoutDropoutLReluAttention_63dim is our baseline. It is in fact the same as ModelL2LossWithoutDropoutLReluAttention except that its input feature are 63 dimensional. Only the first 23 MFCCs are used. The following 40 dimensions are phoneme posterior.
+    ModelL2LossWithoutDropoutLReluAttentionPhoneme is x-vector with SUSTDNN without phoneme classification.
+    ModelL2LossWithoutDropoutLReluAttentionPhonemeCluster is x-vector with SUSTDNN and phoneme classification.
+    ModelL2LossWithoutDropoutLReluAttentionPhonemeCluster2layer is x-vector with SUSTDNN and phoneme classification. Replace the first two TDNN layers with SUSTDNN layers.
 
 
-Requirements:
+## Requirements
 
-Kaldi from https://github.com/kaldi-asr/kaldi
-Python
-NumPy
-TensorFlow
+    Kaldi from https://github.com/kaldi-asr/kaldi
+    Python
+    NumPy
+    TensorFlow
 
 
-License:
+## License
 
 Apache License, Version 2.0 ('LICENSE')
 
