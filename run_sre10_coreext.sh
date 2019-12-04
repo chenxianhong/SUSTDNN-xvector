@@ -58,11 +58,11 @@ if [ $stage -le 0 ]; then
   # This prepares the older NIST SREs from 2004-2006.
   local/make_sre.sh ${data_root} data/
 
-  # Combine all SREs prior to 2016 and Mixer6 into one dataset
+  # Combine all SREs prior to 2010 into one dataset
   utils/combine_data.sh data/sre \
     data/sre2004 data/sre2005_train \
     data/sre2005_test data/sre2006_train \
-    data/sre2006_test data/sre08 data/mx6 
+    data/sre2006_test data/sre08 
   utils/validate_data_dir.sh --no-text --no-feats data/sre
   utils/fix_data_dir.sh data/sre
 
@@ -140,14 +140,14 @@ if [ $stage -le 3 ]; then
 fi
 
 local/tf/run_xvector.sh --stage ${stage} --train-stage ${train_stage} \
-  --data data/swbd_sre_no_sil_no10 --nnet-dir ${nnet_dir} \
+  --data data/swbd_sre_no_sil --nnet-dir ${nnet_dir} \
   --egs-dir ${nnet_dir}/egs
 
   
 if [ ${stage} -le 7 ]; then
   # The SRE10 test data
   local/tf/extract_xvectors_23dimCMVN.sh --cmd "${train_cmd} --long 1 --mem 12G" --nj 20 \
-    ${nnet_dir} data/sre_no10 \
+    ${nnet_dir} data/sre \
     ${nnet_dir}/xvectors_sre
   
   local/tf/extract_xvectors_23dimCMVN.sh --cmd "${train_cmd} --mem 6G" --nj 20 \
