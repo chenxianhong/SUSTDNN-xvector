@@ -1,5 +1,5 @@
 # SUSTDNN-xvector
-This is a Tensorflow implementation of x-vector with speech unit specific TDNN (SUSTDNN)for speaker verification.
+This is a Tensorflow implementation of x-vector with speech-unit-specific TDNN (SUSTDNN)for speaker verification.
 
 It is modified based on the Tensorflow implementation of x-vector topology proposed by David Snyder in Deep Neural Network Embeddings for Text-Independent Speaker Verfication: https://github.com/hsn-zeinali/x-vector-kaldi-tf.
 
@@ -23,6 +23,7 @@ If you want to test different topology, you can add a subclass of Model to local
     ModelL2LossWithoutDropoutLReluAttentionPhoneme is x-vector with SUSTDNN without phoneme classification.
     ModelL2LossWithoutDropoutLReluAttentionPhonemeCluster is x-vector with SUSTDNN and phoneme classification.
     ModelL2LossWithoutDropoutLReluAttentionPhonemeCluster2layer is x-vector with SUSTDNN and phoneme classification. The first two TDNN layers are replaced with SUSTDNN layers.
+    ModelL2LossWithoutDropoutLReluAttentionPhonemeClusterFig2a is x-vector with SUSTDNN and phoneme classification. Fig.2(a) is used as the realizaiton of SUSTDNN.
 
 
 ## Requirements
