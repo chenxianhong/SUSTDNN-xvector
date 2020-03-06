@@ -1439,7 +1439,7 @@ class ModelL2LossWithoutDropoutLReluAttentionPhoneme(Model):
                         # Apply nonlinearity and BN
                         h = tf.nn.leaky_relu(h, alpha=0.2, name='lrelu')
 
-
+                        """
                         h_splits = tf.split(h, num_or_size_splits=layer_size, axis=2)
                         h_reshape=tf.expand_dims(h_splits[0], axis=3)
                         for q in range(1,len(h_splits)):
@@ -1447,6 +1447,15 @@ class ModelL2LossWithoutDropoutLReluAttentionPhoneme(Model):
                             h_reshape=tf.concat([h_reshape, h_q], axis=3)    #[None, None, num_phoneme, layer_size]
 
                         h = tf.einsum('ijk,ijkl->ijl', posterior, h_reshape)  #[None, None, layer_size]
+                        """
+                        
+                        h_splits = tf.split(h, num_or_size_splits=num_phoneme, axis=2)
+                        h_reshape=tf.expand_dims(h_splits[0], axis=2)
+                        for q in range(1,len(h_splits)):
+                            h_q=tf.expand_dims(h_splits[q], axis=2)
+                            h_reshape=tf.concat([h_reshape, h_q], axis=2)    #[None, None, num_phoneme, layer_size]
+
+                        h = tf.einsum('ijk,ijkl->ijl', posterior, h_reshape, name='layeroutput')  #[None, None, layer_size]
                         
                         h = batch_norm_wrapper(h, decay=0.95, is_training=self.phase)
 
